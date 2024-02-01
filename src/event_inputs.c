@@ -1,7 +1,8 @@
 #include "header.h"
 
-void events(SDL_Event event, int *running)
+void event_inputs(int *running)
 {
+    SDL_Event event;
     while (SDL_PollEvent(&event))
     {
         if (event.type == SDL_QUIT)

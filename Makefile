@@ -2,7 +2,8 @@
 
 CC = gcc
 CFLAGS = -O2 -lSDL2 -lSDL2main -I./include/
-OBJS = main.o glad.o initalize_free.o event_inputs.o
+SRCS = *.c
+OBJS = *.o
 
 all: gpuFractal
 
