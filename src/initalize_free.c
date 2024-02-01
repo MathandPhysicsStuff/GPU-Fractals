@@ -53,9 +53,12 @@ void initialize(SDL_Window **window, SDL_GLContext *gl_context, int screen_width
     }
 }
 
-void free_memory(SDL_Window *window)
+void free_memory(SDL_Window **window, GLuint *vertex_array_object, GLuint *vertex_buffer_object, GLuint *graphics_pipeline_object)
 {
-    SDL_DestroyWindow(window);
+    glDeleteBuffers(1, vertex_buffer_object);
+    glDeleteVertexArrays(1, vertex_array_object);
+    glDeleteProgram(*graphics_pipeline_object);
+    SDL_DestroyWindow(*window);
     SDL_Quit();
 }
 

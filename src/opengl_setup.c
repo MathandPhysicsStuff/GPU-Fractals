@@ -16,7 +16,7 @@ GLuint compile_shader(GLuint type, const char* source)
 
     glShaderSource(shader_object, 1, &source, NULL);
     glCompileShader(shader_object);
-
+    
     return shader_object;
 }
 
@@ -34,28 +34,32 @@ GLuint create_shader_program(const char* vertex_shader_source, const char* fragm
 
     glValidateProgram(program_object);
 
+    glDetachShader(program_object, vertex_shader);
+    glDetachShader(program_object, fragment_shader);
+
+    glDeleteShader(vertex_shader);
+    glDeleteShader(fragment_shader);
+
     return program_object;
 }
 
-void create_graphics_pipeline(GLuint graphics_pipeline_object,
+void create_graphics_pipeline(GLuint *graphics_pipeline_object,
                               const char* vertex_shader_source, const char* fragment_shader_source)
 {
-    graphics_pipeline_object = create_shader_program(vertex_shader_source, fragment_shader_source);
+    *graphics_pipeline_object = create_shader_program(vertex_shader_source, fragment_shader_source);
 }
 
-
-void create_vertex_specs(GLfloat *vertex, int vertex_length, GLint step_size,
-                         GLuint vertex_array_object, GLuint vertex_buffer_object)
+void create_vertex_specs(GLfloat *vertices, int vertices_size, GLint step_size,
+                         GLuint *vertex_array_object, GLuint *vertex_buffer_object)
 {
-    
-    glGenVertexArrays(1, &vertex_array_object);
-    glBindVertexArray(vertex_array_object);
+    glGenVertexArrays(1, vertex_array_object);
+    glBindVertexArray(*vertex_array_object);
 
-    glGenBuffers(1, &vertex_buffer_object);
-    glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_object);
+    glGenBuffers(1, vertex_buffer_object);
+    glBindBuffer(GL_ARRAY_BUFFER, *vertex_buffer_object);
     glBufferData(GL_ARRAY_BUFFER,
-                 vertex_length * sizeof(GLfloat),
-                 vertex,
+                 vertices_size,
+                 vertices,
                  GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(0);
@@ -70,8 +74,6 @@ void create_vertex_specs(GLfloat *vertex, int vertex_length, GLint step_size,
 
     glDisableVertexAttribArray(0);           
 }
-
-
 
 
 
