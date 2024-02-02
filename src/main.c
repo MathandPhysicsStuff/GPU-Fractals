@@ -19,9 +19,15 @@ int main()
     
     GLfloat vertices[] =
     {
-        0.0, 0.8, 0.0,
-        -0.8, -0.8, 0.0,
-        0.8, -0.8, 0.0
+        //first triangle
+        0.5, 0.5, 0.0,
+        -0.5, 0.5, 0.0,
+        0.5, -0.5, 0.0,
+
+        //second triangle
+        -0.5, 0.5, 0.0,
+        -0.5, -0.5, 0.0,
+        0.5, -0.5, 0.0
     };
     int vertices_size = sizeof(vertices);
 

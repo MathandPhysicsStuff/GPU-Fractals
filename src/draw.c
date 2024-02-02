@@ -18,7 +18,7 @@ void draw(GLuint *vertex_array_object, GLuint *vertex_buffer_object)
     GLCheck( glBindVertexArray(*vertex_array_object); )
     GLCheck( glBindBuffer(GL_ARRAY_BUFFER, *vertex_buffer_object); )
 
-    GLCheck( glDrawArrays(GL_TRIANGLES, 0, 3); )
+    GLCheck( glDrawArrays(GL_TRIANGLES, 0, 6); )
 
     glUseProgram(0);
 }
