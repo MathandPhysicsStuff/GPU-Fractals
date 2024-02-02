@@ -15,19 +15,25 @@ int main()
 
     GLuint vertex_array_object = 0;
     GLuint vertex_buffer_object = 0;
+    GLuint index_buffer_object = 0;
     GLuint graphics_pipeline_object = 0;
     
     GLfloat vertices[] =
     {
-        //first triangle
+        //top right 0
         0.5, 0.5, 0.0,
+        
+        //top left 1
         -0.5, 0.5, 0.0,
-        0.5, -0.5, 0.0,
+ 
+        //bottom left 2
+        -0.5, -0.5, 0.0,     
 
-        //second triangle
-        -0.5, 0.5, 0.0,
-        -0.5, -0.5, 0.0,
+        //bottom right 3
         0.5, -0.5, 0.0
+
+        //triangle one -> 0 1 3
+        //triangle two -> 1 2 3
     };
     int vertices_size = sizeof(vertices);
 
@@ -69,7 +75,7 @@ int main()
     //create_vertex_specs2();
     //create_graphics_pipeline(vertex_shader_source, fragment_shader_source);
     
-    create_vertex_specs(vertices, vertices_size, 3, &vertex_array_object, &vertex_buffer_object);
+    create_vertex_specs(vertices, vertices_size, 3, &vertex_array_object, &vertex_buffer_object, &index_buffer_object);
     create_graphics_pipeline(&graphics_pipeline_object, vertex_shader_source, fragment_shader_source);
     
     int running = TRUE;

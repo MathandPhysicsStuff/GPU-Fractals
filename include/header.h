@@ -29,7 +29,7 @@ GLuint create_shader_program(const char* vertex_shader_source, const char* fragm
 void create_graphics_pipeline(GLuint *graphics_pipeline_object,
                               const char* vertex_shader_source, const char* fragment_shader_source);
 void create_vertex_specs(GLfloat *vertices, int vertices_length, GLint step_size,
-                         GLuint *vertex_array_object, GLuint *vertex_buffer_object);
+                         GLuint *vertex_array_object, GLuint *vertex_buffer_object, GLuint *index_buffer_object);
  
 //draw.c
 void predraw(GLuint *graphics_pipeline_object, int screen_width, int screen_height);

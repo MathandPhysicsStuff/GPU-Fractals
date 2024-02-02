@@ -50,17 +50,29 @@ void create_graphics_pipeline(GLuint *graphics_pipeline_object,
 }
 
 void create_vertex_specs(GLfloat *vertices, int vertices_size, GLint step_size,
-                         GLuint *vertex_array_object, GLuint *vertex_buffer_object)
+                         GLuint *vertex_array_object, GLuint *vertex_buffer_object, GLuint *index_buffer_object)
 {
     glGenVertexArrays(1, vertex_array_object);
     glBindVertexArray(*vertex_array_object);
 
+    //Vertex Buffer Object
     glGenBuffers(1, vertex_buffer_object);
     glBindBuffer(GL_ARRAY_BUFFER, *vertex_buffer_object);
     glBufferData(GL_ARRAY_BUFFER,
                  vertices_size,
                  vertices,
                  GL_STATIC_DRAW);
+    
+    
+    //index Buffer Object
+    GLuint index_buffer_data[] = { 0,1,3, 1,2,3 }; 
+    glGenBuffers(1, index_buffer_object);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *index_buffer_object);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER,
+                 sizeof(index_buffer_data),
+                 index_buffer_data,
+                 GL_STATIC_DRAW);
+
 
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0,
