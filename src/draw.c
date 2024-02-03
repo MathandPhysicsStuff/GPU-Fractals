@@ -18,8 +18,6 @@ void draw(GLuint *vertex_array_object, GLuint *vertex_buffer_object)
     GLCheck( glBindVertexArray(*vertex_array_object); )
     GLCheck( glBindBuffer(GL_ARRAY_BUFFER, *vertex_buffer_object); )
 
-    //GLCheck( glDrawArrays(GL_TRIANGLES, 0, 6); )
-    //GLCheck( glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0); )
     GLCheck( glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0); )
     glUseProgram(0);
 }

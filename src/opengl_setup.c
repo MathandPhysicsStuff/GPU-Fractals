@@ -1,5 +1,41 @@
 #include "header.h"
 
+char* read_file(char *file_name)
+{
+    FILE *file;
+
+    file = fopen(file_name, "r");
+    
+    if (file == NULL)
+    {
+        printf("%s could not be opened\n", file_name);
+        return NULL;
+    }
+
+    fseek(file, 0, SEEK_END);
+
+    int file_length = ftell(file);
+    printf("file length: %d\n", file_length);
+
+    fseek(file, 0, SEEK_SET);
+    
+    char *string = malloc(sizeof(char) * (file_length+1));
+
+    char c;
+    int i = 0;
+
+    while ((c = fgetc(file)) != EOF)
+    {
+        string[i] = c;
+        i++;
+    }
+    string[i] = '\0';
+
+    fclose(file);
+
+    return string;
+}
+
 GLuint compile_shader(GLuint type, const char* source)
 {
     GLuint shader_object;

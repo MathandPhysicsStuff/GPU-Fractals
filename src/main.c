@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "SDL2/SDL.h"
 #include "glad/glad.h"
@@ -17,7 +18,7 @@ int main()
     GLuint vertex_buffer_object = 0;
     GLuint index_buffer_object = 0;
     GLuint graphics_pipeline_object = 0;
-    
+
     GLfloat vertices[] =
     {
         //top right 0
@@ -54,30 +55,25 @@ int main()
     "   color = vec4(1.0, 0.5, 0.0, 1.0);\n"
     "}\n";
     */
-    
-    const char *vertex_shader_source = "#version 460 core\n"
-    "layout (location = 0) in vec3 aPos;\n"
-    "void main()\n"
-    "{\n"
-    "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-    "}\0";
 
-    const char *fragment_shader_source = "#version 460 core\n"
-    "out vec4 FragColor;\n"
-    "void main()\n"
-    "{\n"
-    "   FragColor = vec4(1.0f, 0.0f, 0.0f, 1.0f);\n"
-    "}\n\0";
+    char *vertex_shader_source = read_file("./shaders/shader.glsl");
+    char *fragment_shader_source = read_file("./shaders/fragment.glsl");
+
+    if (vertex_shader_source == NULL)
+        printf("Error reading vertex_shader_source\n");
+
+    if (fragment_shader_source == NULL)
+        printf("Error reading fragment_shader_source\n");
 
     //Initializes SDL and openGL 
     initialize(&window, &gl_context, SCREEN_WIDTH, SCREEN_HEIGHT, info); //function in src/initialize_free.c
-
-    //create_vertex_specs2();
-    //create_graphics_pipeline(vertex_shader_source, fragment_shader_source);
     
     create_vertex_specs(vertices, vertices_size, 3, &vertex_array_object, &vertex_buffer_object, &index_buffer_object);
     create_graphics_pipeline(&graphics_pipeline_object, vertex_shader_source, fragment_shader_source);
-    
+ 
+    free(vertex_shader_source);
+    free(fragment_shader_source);
+   
     int running = TRUE;
     while (running == TRUE)
     {

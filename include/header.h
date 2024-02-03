@@ -2,6 +2,7 @@
 #define HEADER_H
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "SDL2/SDL.h"
 #include "glad/glad.h"
@@ -24,6 +25,7 @@ void key_events(SDL_Event event, int *running);
 void mouse_events(SDL_Event event);
 
 //opengl_setup.c
+char* read_file(char *file_name); //for reading shader and fragment files
 GLuint compile_shader(GLuint type, const char* source);
 GLuint create_shader_program(const char* vertex_shader_source, const char* fragment_shader_source);
 void create_graphics_pipeline(GLuint *graphics_pipeline_object,
