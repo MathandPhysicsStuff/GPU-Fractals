@@ -9,7 +9,7 @@
 int main()
 {
     const int SCREEN_WIDTH = 640;
-    const int SCREEN_HEIGHT = 480;
+    const int SCREEN_HEIGHT = 640;
     SDL_Window *window = NULL;
     SDL_GLContext gl_context = NULL;
     int info = FALSE; //setting info = TRUE will print opengl info to the terminal 
@@ -22,39 +22,32 @@ int main()
     GLfloat vertices[] =
     {
         //top right 0
-        0.5, 0.5, 0.0,
+        1.0, 1.0, 0.0,
         
         //top left 1
-        -0.5, 0.5, 0.0,
+        -1.0, 1.0, 0.0,
  
         //bottom left 2
-        -0.5, -0.5, 0.0,     
+        -1.0, -1.0, 0.0,     
 
         //bottom right 3
-        0.5, -0.5, 0.0
+        1.0, -1.0, 0.0
 
         //triangle one -> 0 1 3
         //triangle two -> 1 2 3
     };
     int vertices_size = sizeof(vertices);
 
-    /*
-    const char* vertex_shader_source =
-    "#version 460 core\n"
-    "in vec4 position;\n"
-    "void main()\n"
-    "{\n"
-    "   gl_position = vec4(position.x, position.y, position.z, position.w);\n"
-    "}\n";
-
-    const char* fragment_shader_source =
-    "#version 460 core\n"
-    "out vec4 color;\n"
-    "void main()\n"
-    "{\n"
-    "   color = vec4(1.0, 0.5, 0.0, 1.0);\n"
-    "}\n";
-    */
+    UniformVariables U =
+    {
+        .state = 0,
+        .iter = 256,
+        .x_res = SCREEN_WIDTH,
+        .y_res = SCREEN_HEIGHT,
+        .x_point = 0, .y_point = 0,
+        .lx_off = 2, .ly_off = 2,
+        .ux_off = 2, .uy_off = 2,
+    };
 
     char *vertex_shader_source = read_file("./shaders/shader.glsl");
     char *fragment_shader_source = read_file("./shaders/fragment.glsl");
@@ -79,7 +72,7 @@ int main()
     {
         event_inputs(&running); //function in src/event_inputs.c
         
-        predraw(&graphics_pipeline_object, SCREEN_WIDTH, SCREEN_HEIGHT);
+        predraw(&graphics_pipeline_object, &U);
         draw(&vertex_array_object, &vertex_buffer_object);
 
         SDL_GL_SwapWindow(window);

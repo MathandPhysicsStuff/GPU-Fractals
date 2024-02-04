@@ -12,6 +12,19 @@
 
 enum boolean { FALSE, TRUE };
 
+typedef struct UniformVariables
+{
+    GLint state;
+    int iter;
+    int x_res, y_res;
+    float zoom;
+    float x_point, y_point;
+    float lx_off, ux_off;
+    float ly_off, uy_off;
+    float xlb, ylb, xub, yub;
+
+}UniformVariables;
+
 //initialize_free.c
 void initialize(SDL_Window **window, SDL_GLContext *gl_context, int screen_width, int screen_height, int info);
 void free_memory(SDL_Window **window,
@@ -34,7 +47,7 @@ void create_vertex_specs(GLfloat *vertices, int vertices_length, GLint step_size
                          GLuint *vertex_array_object, GLuint *vertex_buffer_object, GLuint *index_buffer_object);
  
 //draw.c
-void predraw(GLuint *graphics_pipeline_object, int screen_width, int screen_height);
+void predraw(GLuint *graphics_pipeline_object, UniformVariables *U);
 void draw(GLuint *vertex_array_object, GLuint *vertex_buffer_object);
 
 //debug.c

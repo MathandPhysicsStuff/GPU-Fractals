@@ -15,7 +15,7 @@ char* read_file(char *file_name)
     fseek(file, 0, SEEK_END);
 
     int file_length = ftell(file);
-    printf("file length: %d\n", file_length);
+    //printf("file length: %d\n", file_length);
 
     fseek(file, 0, SEEK_SET);
     
