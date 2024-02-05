@@ -9,7 +9,7 @@
 int main()
 {
     const int SCREEN_WIDTH = 640;
-    const int SCREEN_HEIGHT = 640;
+    const int SCREEN_HEIGHT = 480;
     SDL_Window *window = NULL;
     SDL_GLContext gl_context = NULL;
     int info = FALSE; //setting info = TRUE will print opengl info to the terminal 
@@ -41,12 +41,13 @@ int main()
     UniformVariables U =
     {
         .state = 0,
-        .iter = 256,
+        .iter = 512,
         .x_res = SCREEN_WIDTH,
         .y_res = SCREEN_HEIGHT,
         .x_point = 0, .y_point = 0,
         .lx_off = 2, .ly_off = 2,
         .ux_off = 2, .uy_off = 2,
+        .step = 0.07,
     };
 
     char *vertex_shader_source = read_file("./shaders/shader.glsl");
@@ -70,7 +71,7 @@ int main()
     int running = TRUE;
     while (running == TRUE)
     {
-        event_inputs(&running); //function in src/event_inputs.c
+        event_inputs(&running, &U); //function in src/event_inputs.c
         
         predraw(&graphics_pipeline_object, &U);
         draw(&vertex_array_object, &vertex_buffer_object);

@@ -17,11 +17,11 @@ typedef struct UniformVariables
     GLint state;
     int iter;
     int x_res, y_res;
-    float zoom;
     float x_point, y_point;
     float lx_off, ux_off;
     float ly_off, uy_off;
     float xlb, ylb, xub, yub;
+    float step;
 
 }UniformVariables;
 
@@ -33,9 +33,9 @@ void free_memory(SDL_Window **window,
                  GLuint *graphics_pipeline_object);
 
 //event_inputs.c
-void event_inputs(int *running);
-void key_events(SDL_Event event, int *running);
-void mouse_events(SDL_Event event);
+void event_inputs(int *running, UniformVariables *U);
+void key_events(SDL_Event event, int *running, UniformVariables *U);
+void mouse_events(SDL_Event event, UniformVariables *U);
 
 //opengl_setup.c
 char* read_file(char *file_name); //for reading shader and fragment files

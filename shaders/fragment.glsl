@@ -18,13 +18,15 @@ int i;
 float red = 0, green = 0, blue = 0;
 float x_scale, y_scale;
 float a, b, na, nb, re, im;
+float max_res = max(u_x_res, u_y_res);
+float min_res = min(u_x_res, u_y_res);
 
 void main()
 {
     if (u_state == 0)
     {
-        x_scale = (u_xub - u_xlb) / float(u_x_res);
-        y_scale = (u_yub - u_ylb) / float(u_y_res);
+        x_scale = (u_xub - u_xlb) / max_res;
+        y_scale = (u_yub - u_ylb) / max_res;
 
         a = u_xlb + (gl_FragCoord.x * x_scale); 
         b = u_ylb + (gl_FragCoord.y * y_scale); 
@@ -49,12 +51,13 @@ void main()
         red = float(i % 256) / 256;
         green = float(i % 256) / 256;
         blue = float(i % 256) / 256;
+
         FragColor = vec4(red, green, blue, 1.0);
     }
 
     else
     {
-        FragColor = vec4(0.0f, 1.0f, 0.0f, 1.0f);
+        FragColor = vec4(0.0, 0.0, 1.0, 1.0);
     }
 }
 
