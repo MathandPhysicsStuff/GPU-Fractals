@@ -20,6 +20,7 @@ void key_events(SDL_Event event, int *running, UniformVariables *U)
 {
     float zoom_in = 0.9;
     float zoom_out = 1.5;
+    int zoom_level = 0;
 
     if (event.type == SDL_KEYDOWN)
     {
@@ -52,6 +53,7 @@ void key_events(SDL_Event event, int *running, UniformVariables *U)
                 U->ly_off *= zoom_in;            
                 U->uy_off *= zoom_in;     
                 U->step *= zoom_in;            
+                U->zoom_level += 1;         
                 break;
 
             case SDLK_x:
@@ -59,7 +61,8 @@ void key_events(SDL_Event event, int *running, UniformVariables *U)
                 U->ux_off *= zoom_out;            
                 U->ly_off *= zoom_out;            
                 U->uy_off *= zoom_out;     
-                U->step *= zoom_out;            
+                U->step *= zoom_out;   
+                U->zoom_level -= 1;         
                 break;
 
             case SDLK_i:
@@ -74,7 +77,8 @@ void key_events(SDL_Event event, int *running, UniformVariables *U)
             case SDLK_p:
                 printf("info:\n");
                 printf("position: %f, %f\n", U->x_point, U->y_point);
-                printf("iterations: %d\n\n", U->iter);
+                printf("iterations: %d\n", U->iter);
+                printf("zoom level: %d\n\n", U->zoom_level);
                 break;
 
         }

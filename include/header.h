@@ -16,6 +16,7 @@ typedef struct UniformVariables
 {
     GLint state;
     int iter;
+    int zoom_level;
     int x_res, y_res;
     float x_point, y_point;
     float lx_off, ux_off;

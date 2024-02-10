@@ -13,16 +13,20 @@ uniform float u_xlb;
 uniform float u_ylb;
 uniform float u_xub;
 uniform float u_yub;
-  
+
+ 
 int i; 
 float red = 0, green = 0, blue = 0;
+
 float x_scale, y_scale;
 float a, b, na, nb, re, im;
 float max_res = max(u_x_res, u_y_res);
 float min_res = min(u_x_res, u_y_res);
 
+
 void main()
 {
+
     if (u_state == 0)
     {
         x_scale = (u_xub - u_xlb) / max_res;
@@ -60,4 +64,19 @@ void main()
         FragColor = vec4(0.0, 0.0, 1.0, 1.0);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -8,8 +8,8 @@
 
 int main()
 {
-    const int SCREEN_WIDTH = 640;
-    const int SCREEN_HEIGHT = 480;
+    const int SCREEN_WIDTH = 640; //1280;
+    const int SCREEN_HEIGHT = 640; //720;
     SDL_Window *window = NULL;
     SDL_GLContext gl_context = NULL;
     int info = FALSE; //setting info = TRUE will print opengl info to the terminal 
@@ -18,6 +18,10 @@ int main()
     GLuint vertex_buffer_object = 0;
     GLuint index_buffer_object = 0;
     GLuint graphics_pipeline_object = 0;
+
+    char* vertex_shader_file = "./shaders/shader.glsl";
+    char* fragment_shader_file = "./shaders/fragment.glsl";
+    char* test_file = "./shaders/test_frag.glsl";
 
     GLfloat vertices[] =
     {
@@ -42,6 +46,7 @@ int main()
     {
         .state = 0,
         .iter = 512,
+        .zoom_level = 0,
         .x_res = SCREEN_WIDTH,
         .y_res = SCREEN_HEIGHT,
         .x_point = 0, .y_point = 0,
@@ -50,8 +55,8 @@ int main()
         .step = 0.07,
     };
 
-    char *vertex_shader_source = read_file("./shaders/shader.glsl");
-    char *fragment_shader_source = read_file("./shaders/fragment.glsl");
+    char *vertex_shader_source = read_file(vertex_shader_file);
+    char *fragment_shader_source = read_file(fragment_shader_file);
 
     if (vertex_shader_source == NULL)
         printf("Error reading vertex_shader_source\n");
