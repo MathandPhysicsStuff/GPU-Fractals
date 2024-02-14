@@ -47,6 +47,22 @@ void key_events(SDL_Event event, int *running, UniformVariables *U)
                 U->x_point += U->step;
                 break;
 
+            case SDLK_a:
+                U->julia_x -= 0.01;
+                break;
+
+            case SDLK_d:
+                U->julia_x += 0.01;
+                break;
+
+            case SDLK_w:
+                U->julia_y += 0.01;
+                break;
+
+            case SDLK_s:
+                U->julia_y -= 0.01;
+                break;
+
             case SDLK_z:
                 U->lx_off *= zoom_in;            
                 U->ux_off *= zoom_in;            
@@ -73,14 +89,38 @@ void key_events(SDL_Event event, int *running, UniformVariables *U)
                 if (U->iter > 64)
                     U->iter -= 64;
                 break;
-               
+
+            case SDLK_LSHIFT:
+                U->shift_pressed = TRUE;
+                break;
+
+            case SDLK_0:
+                if (U->shift_pressed == TRUE) U->state = 0;
+                else U->color_state = 0;
+                break;
+ 
+            case SDLK_1:
+                if (U->shift_pressed == TRUE) U->state = 1;
+                else U->color_state = 1;
+                break;
+              
             case SDLK_p:
                 printf("info:\n");
                 printf("position: %f, %f\n", U->x_point, U->y_point);
+                printf("julia set point: %f, %f\n", U->julia_x, U->julia_y);
                 printf("iterations: %d\n", U->iter);
                 printf("zoom level: %d\n\n", U->zoom_level);
                 break;
 
+        }
+    }
+    if (event.type == SDL_KEYUP)
+    {
+        switch (event.key.keysym.sym)
+        {
+            case SDLK_LSHIFT:
+                U->shift_pressed = FALSE;  
+                break;
         }
     }
 }

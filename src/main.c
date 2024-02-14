@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include "SDL2/SDL.h"
 #include "glad/glad.h"
@@ -44,7 +45,8 @@ int main()
 
     UniformVariables U =
     {
-        .state = 0,
+        .state = 1,
+        .color_state = 0,
         .iter = 512,
         .zoom_level = 0,
         .x_res = SCREEN_WIDTH,
@@ -52,7 +54,9 @@ int main()
         .x_point = 0, .y_point = 0,
         .lx_off = 2, .ly_off = 2,
         .ux_off = 2, .uy_off = 2,
+        .julia_x = 0.285, .julia_y = 0.01,
         .step = 0.07,
+        .shift_pressed = FALSE,
     };
 
     char *vertex_shader_source = read_file(vertex_shader_file);
@@ -74,10 +78,19 @@ int main()
     free(fragment_shader_source);
    
     int running = TRUE;
+    float j0, j1, theta = 0;
     while (running == TRUE)
     {
         event_inputs(&running, &U); //function in src/event_inputs.c
         
+        /* 
+        j0 = 0.8*cos(theta); 
+        j1 = 0.8*sin(theta);
+        theta += 0.01;
+        U.julia_x = j0; 
+        U.julia_y = j1; 
+        */
+
         predraw(&graphics_pipeline_object, &U);
         draw(&vertex_array_object, &vertex_buffer_object);
 

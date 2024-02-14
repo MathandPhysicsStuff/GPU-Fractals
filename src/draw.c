@@ -20,6 +20,8 @@ void predraw(GLuint *graphics_pipeline_object, UniformVariables *U)
     GLint ylb_location = glGetUniformLocation(*graphics_pipeline_object, "u_ylb");
     GLint xub_location = glGetUniformLocation(*graphics_pipeline_object, "u_xub");
     GLint yub_location = glGetUniformLocation(*graphics_pipeline_object, "u_yub");
+    GLint julia_x_location = glGetUniformLocation(*graphics_pipeline_object, "u_julia_x");
+    GLint julia_y_location = glGetUniformLocation(*graphics_pipeline_object, "u_julia_y");
 
     U->xlb = U->x_point - U->lx_off;
     U->ylb = U->y_point - U->ly_off;
@@ -38,6 +40,8 @@ void predraw(GLuint *graphics_pipeline_object, UniformVariables *U)
         glUniform1f(ylb_location, U->ylb);
         glUniform1f(xub_location, U->xub);
         glUniform1f(yub_location, U->yub);
+        glUniform1f(julia_x_location, U->julia_x);
+        glUniform1f(julia_y_location, U->julia_y);
     }
     else 
     {

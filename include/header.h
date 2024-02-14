@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include "SDL2/SDL.h"
 #include "glad/glad.h"
@@ -15,6 +16,7 @@ enum boolean { FALSE, TRUE };
 typedef struct UniformVariables
 {
     GLint state;
+    GLint color_state;
     int iter;
     int zoom_level;
     int x_res, y_res;
@@ -22,7 +24,11 @@ typedef struct UniformVariables
     float lx_off, ux_off;
     float ly_off, uy_off;
     float xlb, ylb, xub, yub;
+    float julia_x, julia_y;
     float step;
+
+    //I started using this struct for other stuff because in lazy
+    int shift_pressed;
 
 }UniformVariables;
 
